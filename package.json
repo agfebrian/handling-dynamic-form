@@ -1,6 +1,6 @@
 {
   "name": "handling-dynamic-form",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Library for handling dynamic form",
   "main": "index.js",
   "scripts": {
