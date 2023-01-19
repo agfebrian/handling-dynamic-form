@@ -2,7 +2,7 @@ const form = document.querySelector(".dynamic--form-fdz");
 const button = document.querySelector(
   ".dynamic--form-fdz > button[type=submit]"
 );
-const baseUrlApi = "http://18.143.37.190/v1";
+const baseUrlApi = "https://apicrm.foodizz.id/";
 
 const submitForm = (event) => {
   event.preventDefault();
