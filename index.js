@@ -6,9 +6,17 @@ let urlApiVillage = "";
 const body = document.querySelector("body");
 const form = document.createElement("form");
 const script = document.querySelector("script[data-id]");
+const target = document.querySelector("script[data-target]");
 const uuid = script.dataset.id;
+
 form.setAttribute("class", "dynamic--form-fdz");
-body.appendChild(form);
+if (target) {
+  const valueTarget = target.dataset.target;
+  const targetElementId = document.querySelector(`#${valueTarget}`);
+  targetElementId.appendChild(form);
+} else {
+  body.appendChild(form);
+}
 
 fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
   .then((res) => res.json())
