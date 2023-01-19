@@ -1,0 +1,42 @@
+.dynamic--form-fdz {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+  border: 1px solid #E5E8EC;
+}
+
+.dynamic--form-fdz>.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.dynamic--form-fdz>.item>.input, .dynamic--form-fdz>.item>.select {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #E5E8EC;
+  outline: none;
+}
+
+.dynamic--form-fdz>button[type=submit] {
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border: none;
+  outline: none;
+  background-color: #0D6EFD;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer
+}
+
+.dynamic--form-fdz>button[type=submit]:hover {
+  opacity: 0.8;
+}
