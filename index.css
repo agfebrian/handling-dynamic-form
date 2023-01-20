@@ -17,10 +17,18 @@
   gap: 8px
 }
 
-.dynamic--form-fdz>.item>.input, .dynamic--form-fdz>.item>.select {
+.dynamic--form-fdz>.item>.input {
+  border-radius: 10px;
+  border: 1px solid #E5E8EC;
+  padding: 10px;
+  outline: none;
+}
+
+.dynamic--form-fdz>.item>.select {
   border-radius: 10px;
   border: 1px solid #E5E8EC;
   min-height: 40px;
+  padding: 0 10px;
   outline: none;
 }
 
