@@ -308,5 +308,5 @@ var head = document.getElementsByTagName("HEAD")[0];
 var link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "https://unpkg.com/handling-dynamic-form@2.5.0/index.css";
+link.href = "https://unpkg.com/handling-dynamic-form@2.10.0/index.css";
 head.appendChild(link);
