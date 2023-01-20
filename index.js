@@ -289,7 +289,7 @@ const submitForm = (event) => {
         additional_info,
       } = res;
       if (status_code == 201) {
-        alert("Success create customer");
+        alert("Terima kasih telah mengisi form");
         form.reset();
         window.location = redirect_url;
       } else {
