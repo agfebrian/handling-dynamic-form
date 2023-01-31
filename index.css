@@ -32,18 +32,26 @@
   outline: none;
 }
 
-.dynamic--form-fdz>.item>.input--phone {
+.dynamic--form-fdz>.item>.input-phone {
   display: flex;
 }
 
-.dynamic--form-fdz>.item>.input--phone select {
+.dynamic--form-fdz>.item>.input-phone select {
   border-radius: 10px 0 0 10px;
   background-color: #F8F9FA;
+  border: 1px solid #E5E8EC;
+  min-height: 40px;
+  padding: 0 10px;
+  outline: none;
 }
 
-.dynamic--form-fdz>.item>.input--phone input {
+.dynamic--form-fdz>.item>.input-phone input {
   border-left: none;
   border-radius: 0 10px 10px 0;
+  border: 1px solid #E5E8EC;
+  width: 100%;
+  padding: 10px;
+  outline: none;
 }
 
 .dynamic--form-fdz>button[type=submit] {
