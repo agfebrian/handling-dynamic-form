@@ -43,7 +43,7 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
           });
           result = result + `${element}`;
         } else {
-          element = createInput(
+          element = await createInput(
             item.label,
             item.field,
             item.type.code,
@@ -95,7 +95,7 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
     }
   });
 
-const createInput = (label, field, type, require, value) => {
+const createInput = async (label, field, type, require, value) => {
   let input = "";
 
   switch (type) {
@@ -129,6 +129,61 @@ const createInput = (label, field, type, require, value) => {
       });
 
       input = radio;
+      break;
+    case "input_number":
+      if (field == "phone") {
+        let options = "";
+        let { data } = await fetch(
+          "https://countriesnow.space/api/v0.1/countries/codes"
+        )
+          .then((res) => res.json())
+          .then((res) => res);
+
+        data = data.filter((item) => {
+          switch (item.name) {
+            case "Indonesia":
+              return item;
+            case "Malaysia":
+              return item;
+            case "Singapore":
+              return item;
+            case "United Kingdom":
+              return item;
+            case "United States":
+              return item;
+          }
+        });
+
+        data.forEach((item) => {
+          options += `<option value="${item.dial_code}">${item.code} (${item.dial_code})</option>`;
+        });
+
+        input = `
+          <label for="${label}" class="label">${label}</label>
+          <div class="input-phone">
+              <select
+                class="select"
+                style="background-color: #f8f9fa; width: 120px"
+                name="codeDial"
+              >
+                ${options}
+              </select>
+            <input
+              type="text"
+              name="${field}"
+              class="input"
+              ${require ? "required" : ""}
+            />
+          </div>
+          `;
+      } else {
+        input = `
+          <label for="${label}" class="label">${label}</label>
+          <input class='input' type='number' name='${field}' ${
+          require ? "required" : ""
+        } />
+          `;
+      }
       break;
     case "checkbox":
       input = `
@@ -261,17 +316,35 @@ const dynamicOptions = async (urlAPI, value, target, placeholder) => {
 const submitForm = (event) => {
   event.preventDefault();
   const payload = [];
+  const itemInput = document.querySelectorAll(".dynamic--form-fdz .item");
   const button = document.querySelector(
     ".dynamic--form-fdz > button[type=submit]"
   );
 
   button.setAttribute("disabled", "disabled");
 
-  for (let index = 0; index < form.length; index++) {
-    const el = form[index];
-    if (el.value) {
-      payload.push({ field: el.getAttribute("name"), value: el.value });
+  for (let index = 0; index < itemInput.length; index++) {
+    const el = itemInput[index];
+    const label = el.querySelector(`label`);
+    const elNextSibling = label.nextElementSibling;
+    let elInputPhone;
+    let value = "";
+
+    if (elNextSibling.getAttribute("name")) {
+      value = elNextSibling.value;
+    } else {
+      const elSelectCodeDial = document.querySelector(`select[name=codeDial]`);
+      elInputPhone = document.querySelector(`input[name=phone]`);
+      value = `${elSelectCodeDial.value}-${elInputPhone.value}`;
     }
+
+    payload.push({
+      label: label.innerText,
+      field: elNextSibling.getAttribute("name")
+        ? elNextSibling.getAttribute("name")
+        : elInputPhone.getAttribute("name"),
+      value: value,
+    });
   }
 
   fetch(`${baseUrlApi}/dynamic_form/customer/add/${uuid}`, {
@@ -308,5 +381,5 @@ var head = document.getElementsByTagName("HEAD")[0];
 var link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "https://unpkg.com/handling-dynamic-form@2.11.0/index.css";
+link.href = "https://unpkg.com/handling-dynamic-form@2.12.0/index.css";
 head.appendChild(link);
