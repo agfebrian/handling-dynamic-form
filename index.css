@@ -32,6 +32,20 @@
   outline: none;
 }
 
+.dynamic--form-fdz>.item>.input--phone {
+  display: flex;
+}
+
+.dynamic--form-fdz>.item>.input--phone select {
+  border-radius: 10px 0 0 10px;
+  background-color: #F8F9FA;
+}
+
+.dynamic--form-fdz>.item>.input--phone input {
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+}
+
 .dynamic--form-fdz>button[type=submit] {
   border-radius: 10px;
   padding: 10px 15px;
