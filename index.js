@@ -67,6 +67,7 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
       const selectCity = document.querySelector("[name=city_id]");
       const selectDistrict = document.querySelector("[name=district_id]");
       const selectVillage = document.querySelector("[name=village_id]");
+      const inputPhone = document.querySelector("input[name=phone]");
 
       selectProvince.addEventListener("change", (event) => {
         const select = event.target;
@@ -92,6 +93,8 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
           "Pilih Kelurahan"
         );
       });
+
+      inputPhone.addEventListener("keyup", checkInputPhone);
     }
   });
 
@@ -310,6 +313,16 @@ const dynamicOptions = async (urlAPI, value, target, placeholder) => {
     });
 
     target.innerHTML = options;
+  }
+};
+
+const checkInputPhone = (event) => {
+  const _target = event.target;
+
+  if (_target.value.trim().length >= 9 && _target.value.charAt(0) == "0") {
+    setTimeout(() => {
+      _target.value = _target.value.slice(1, _target.value.length);
+    }, 100);
   }
 };
 
