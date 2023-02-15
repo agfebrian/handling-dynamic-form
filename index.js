@@ -71,10 +71,15 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
 
       selectProvince.addEventListener("change", (event) => {
         const select = event.target;
+        resetDynamicOptions(selectCity, "Pilih Kota");
+        resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
+        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
         dynamicOptions(urlApiCity, select.value, selectCity, "Pilih Kota");
       });
 
       selectCity.addEventListener("change", (event) => {
+        resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
+        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
         const select = event.target;
         dynamicOptions(
           urlApiDistrict,
@@ -86,6 +91,7 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
 
       selectDistrict.addEventListener("change", (event) => {
         const select = event.target;
+        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
         dynamicOptions(
           urlApiVillage,
           select.value,
@@ -314,6 +320,11 @@ const dynamicOptions = async (urlAPI, value, target, placeholder) => {
 
     target.innerHTML = options;
   }
+};
+
+const resetDynamicOptions = (element, defaultText) => {
+  element.value = "";
+  element.innerHTML = `<option value="">${defaultText}</option>`;
 };
 
 const checkInputPhone = (event) => {
