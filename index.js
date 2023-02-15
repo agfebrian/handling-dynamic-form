@@ -71,33 +71,41 @@ fetch(`${baseUrlApi}/dynamic_form/detail/${uuid}`)
 
       selectProvince.addEventListener("change", (event) => {
         const select = event.target;
-        resetDynamicOptions(selectCity, "Pilih Kota");
-        resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
-        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
-        dynamicOptions(urlApiCity, select.value, selectCity, "Pilih Kota");
+        if (selectCity) resetDynamicOptions(selectCity, "Pilih Kota");
+        if (selectDistrict)
+          resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
+        if (selectVillage)
+          resetDynamicOptions(selectVillage, "Pilih Kelurahan");
+        if (selectCity)
+          dynamicOptions(urlApiCity, select.value, selectCity, "Pilih Kota");
       });
 
       selectCity.addEventListener("change", (event) => {
-        resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
-        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
+        if (selectDistrict)
+          resetDynamicOptions(selectDistrict, "Pilih Kecamatan");
+        if (selectVillage)
+          resetDynamicOptions(selectVillage, "Pilih Kelurahan");
         const select = event.target;
-        dynamicOptions(
-          urlApiDistrict,
-          select.value,
-          selectDistrict,
-          "Pilih Kecamatan"
-        );
+        if (selectDistrict)
+          dynamicOptions(
+            urlApiDistrict,
+            select.value,
+            selectDistrict,
+            "Pilih Kecamatan"
+          );
       });
 
       selectDistrict.addEventListener("change", (event) => {
         const select = event.target;
-        resetDynamicOptions(selectVillage, "Pilih Kelurahan");
-        dynamicOptions(
-          urlApiVillage,
-          select.value,
-          selectVillage,
-          "Pilih Kelurahan"
-        );
+        if (selectVillage)
+          resetDynamicOptions(selectVillage, "Pilih Kelurahan");
+        if (selectVillage)
+          dynamicOptions(
+            urlApiVillage,
+            select.value,
+            selectVillage,
+            "Pilih Kelurahan"
+          );
       });
 
       inputPhone.addEventListener("keyup", checkInputPhone);
