@@ -396,6 +396,9 @@ const submitForm = (event) => {
     .finally(() => {
       button.removeAttribute("disabled");
     });
+
+  fbq("track", "CompleteRegistration");
+  fbq("track", "Lead");
 };
 
 form.addEventListener("submit", submitForm);
